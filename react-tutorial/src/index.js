@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import SearchApp from './SearchApp'
 import './index.css'
 
 
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<SearchApp />, document.getElementById('root'))

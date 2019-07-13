@@ -1,7 +1,46 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Table from './Table';
 import Form from './Form';
 
+// This Component is an example on how to use PropTypes
+class SayHello extends Component{
+  static propTypes ={
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string,
+  }
+  render(){
+    const {firstName,lastName}=this.props
+    return(
+      <div>
+        Hello {firstName} {lastName}
+      </div>
+    )
+  }
+}
+function Box({style,size,className='',...props}){
+  const sizeClass= size ? `box--${size}`:''
+  return (
+    <div
+      className={`box ${className} ${sizeClass}`}
+      style={{paddingLeft: 20,border:'solid green',...style}}
+      {...props}
+    >
+      {props.value}
+      </div>
+  )
+}
+const element =
+  (
+    <>
+    <Box size="small" value="small box" style={{color:'blue'}}>     
+    </Box>
+    <Box size="medium" value="medium box" style={{color:'pink'}}>     
+    </Box>
+    <Box size="large" value="large box" style={{color:'orange'}}>     
+    </Box>
+    </>
+  )
 class App extends Component {
 	state = {
 		characters: [],
@@ -29,7 +68,12 @@ handleSubmit = character => {
   	// and I'll put curly braces around it as it's a JavaScript expression.
     return (
     	<div className="container">
-        <h1>React Tutorial</h1>
+        <h1>React Begginer Practice Sandbox</h1>
+        <h2>Styling Example</h2>
+        {element}
+        <h2>PropTypes Example</h2>
+        <SayHello firstName={'Keth'}/>
+        <h2>React Example using states and props</h2>
         <p>Add a character with a name and a job to the table.</p>
         <Table 
           characterData={characters}
