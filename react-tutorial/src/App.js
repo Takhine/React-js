@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import Table from './Table'
-import Form from './Form'
+import React, { Component } from 'react';
+import Table from './Table';
+import Form from './Form';
 
 class App extends Component {
 	state = {
@@ -17,10 +17,10 @@ class App extends Component {
   })
 }
 handleSubmit = character => {
-  this.setState({ characters: [...this.state.characters, character] })
+  this.setState({ characters: [...this.state.characters, character]});
 }
   render() {
-  	const characters = []
+  	const {characters} = this.state;
 
   	// Now, we're going to pass the data through to the child component (Table) with properties,
   	//  kind of how you might pass data through using data- attributes.
@@ -29,9 +29,13 @@ handleSubmit = character => {
   	// and I'll put curly braces around it as it's a JavaScript expression.
     return (
     	<div className="container">
-    <Table characterData={characters} removeCharacter={this.removeCharacter} />
-    <Form handleSubmit={this.handleSubmit} />
-
+        <h1>React Tutorial</h1>
+        <p>Add a character with a name and a job to the table.</p>
+        <Table 
+          characterData={characters}
+          removeCharacter={this.removeCharacter} />
+        <h3>Add New</h3>
+        <Form handleSubmit={this.handleSubmit} />
   		</div>
     )
   }
@@ -39,5 +43,5 @@ handleSubmit = character => {
 
 export default App
 
-// We export the component as App and load it in index.js. It's not mandatory to separate components into files,
+// We export the component as App and load it in index.js. It's not mandatory to separate components into files
 // but an application will start to get unwieldy and out-of-hand if you don't.
