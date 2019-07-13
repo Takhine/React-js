@@ -1,42 +1,45 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+
 import SearchField from './SearchField';
+import SearchedItems from './SearchedItems';
+
+import equipmentList from "./data/equipment.json";
+
 class SearchApp extends Component {
-	state = {
-		items: [
-            {
-                _id:1,
-                title:'Item 1',
-                description:'This is item 1',
-            },
-            {
-                _id:1,
-                title:'Item 1',
-                description:'This is item 1',
-            },
-            {
-                _id:1,
-                title:'Item 1',
-                description:'This is item 1',
-            },
-        ],
-    };
-    
+  state = {
+    search: ""
+  };
 
-    render() {
-  	    const {characters} = this.state;
+  renderEquipment = equipment => {
+    return (
+      <div>
+        <p>{equipment.name}</p>
+      </div>
+    );
+  };
 
-  	// Now, we're going to pass the data through to the child component (Table) with properties,
-  	//  kind of how you might pass data through using data- attributes.
-  	// We can call the property whatever we want, as long as it's not a reserved keyword,
-  	// so I'll go with characterData. The data I'm passing through is the characters variable,
-  	// and I'll put curly braces around it as it's a JavaScript expression.
-        return (
-            <div className="container">
-            <h2>Search and Filter</h2>
-            <SearchField/>
-            </div>
-        )
-    }
+  onchange = e => {
+    this.setState({ search: e.target.value });
+  };
+
+  render() {
+    const { search } = this.state;
+    const filteredEquipment = equipmentList.filter(equipment => {
+      return equipment.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
+
+    return (
+      <div>
+            <SearchField
+                onchange={this.onchange}
+            />               
+            <SearchedItems
+                filteredEquipment={filteredEquipment}
+                renderEquipment={this.renderEquipment}
+            />
+      </div>
+    );
+  }
 }
 
 export default SearchApp;
